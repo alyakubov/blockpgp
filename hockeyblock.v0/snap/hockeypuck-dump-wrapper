@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -euo pipefail
+
+CONFIG=$SNAP_COMMON/config
+if [ ! -f "$CONFIG" ]; then
+	echo "Missing config file $CONFIG."
+	echo "Use 'hockeypuck.config' to create/edit config file"
+	exit 1
+fi
+
+OUTPUT=$SNAP_USER_DATA/dump-$(date %s)
+
+mkdir -p $OUTPUT
+
+echo "Writing dump to $OUTPUT"
+
+cd $OUTPUT
+exec $SNAP/bin/hockeypuck-dump -config $CONFIG

@@ -1,0 +1,49 @@
+[hockeypuck]
+
+##### Log configuration
+###
+loglevel="INFO"
+logfile="/var/snap/hockeypuck/common/log/hockeypuck.log"
+
+##### Location of additional webroot files that may be served by Hockeypuck.
+### This serves the landing page at / and supporting assets like css, js, etc.
+webroot="/var/snap/hockeypuck/common/www"
+
+##### Go HTML templates used to create the index, vindex and stats pages.
+### If you want to change these, you'll need to copy them to
+### /var/snap/hockeypuck/common since the snap is read-only.
+
+indexTemplate="/snap/hockeypuck/current/templates/index.html.tmpl"
+vindexTemplate="/snap/hockeypuck/current/templates/index.html.tmpl"
+statsTemplate="/snap/hockeypuck/current/templates/stats.html.tmpl"
+
+##### Listen address for the HKP protocol
+###
+[hockeypuck.hkp]
+bind=":11371"
+
+##### A database must be configured. Choose MongoDB (default) or PostgreSQL.
+
+### MongoDB configuration example (enabled by default)
+###
+[hockeypuck.openpgp.db.mongo]
+db="hkp"
+
+### PostgreSQL 9.4+ configuration example.
+###
+#[hockeypuck.openpgp.db]
+#driver="postgres-jsonb"
+#dsn="database=hkp host=localhost username=scott password=tiger port=5432 sslmode=disable"
+
+##### SKS reconciliation protocol configuration
+### Note that reconciliation may not converge with SKS hosts since SKS does not filter
+### out invalid or hostile keys. This is currently considered a feature, but may affect
+### whether SKS operators are willing to peer with you.
+###
+#[hockeypuck.conflux.recon]
+#httpAddr=":11371"
+#reconAddr=":11370"
+#
+#[hockeypuck.conflux.recon.partner.peer1]
+#httpAddr="httpbin.org:11371"
+#reconAddr="httpbin.org:11370"

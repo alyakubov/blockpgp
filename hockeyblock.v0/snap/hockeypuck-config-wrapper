@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [[ -z "$EDITOR" || ! -x "$EDITOR" ]]; then
+	echo "EDITOR unset; assuming nano"
+	EDITOR=/bin/nano
+fi
+
+set -euo pipefail
+
+CONFIG=$SNAP_COMMON/config
+if [ ! -e "$CONFIG" ]; then
+	cp $SNAP/default-config $CONFIG
+	[ -d "$SNAP_COMMON/log" ] || mkdir -p $SNAP_COMMON/log
+	[ -d "$SNAP_COMMON/www" ] || cp -r $SNAP/www $SNAP_COMMON/www
+fi
+
+exec $EDITOR $CONFIG

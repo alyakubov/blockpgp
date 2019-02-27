@@ -1,0 +1,59 @@
+name: hockeypuck
+version: '2.0.0'
+summary: OpenPGP Public Keyserver
+description: |
+  Hockeypuck is an OpenPGP Key Server implementing the HTTP Keyserver Protocol.
+
+grade: stable
+confinement: strict
+
+apps:
+  hockeypuck:
+    command: hockeypuck-wrapper
+    daemon: simple
+    plugs:
+    - network
+    - network-bind
+    daemon: simple
+  load:
+    command: hockeypuck-load-wrapper
+    plugs:
+    - home
+    - network
+    - network-bind
+  dump:
+    command: hockeypuck-dump-wrapper
+    plugs:
+    - network
+    - network-bind
+  pbuild:
+    command: hockeypuck-pbuild-wrapper
+    plugs:
+    - network
+    - network-bind
+  config:
+    command: hockeypuck-config-wrapper
+
+parts:
+  hockeypuck:
+    build: |-
+      cp ../../../snap/*-wrapper $SNAPCRAFT_PART_INSTALL
+      cp ../../../snap/default-config $SNAPCRAFT_PART_INSTALL
+      cp -r ../../../snap/templates $SNAPCRAFT_PART_INSTALL
+      cp -r ../../../snap/www $SNAPCRAFT_PART_INSTALL
+    plugin: godeps
+    go-packages:
+    - github.com/hockeypuck/server/cmd/hockeypuck
+    - github.com/hockeypuck/server/cmd/hockeypuck-load
+    - github.com/hockeypuck/server/cmd/hockeypuck-dump
+    - github.com/hockeypuck/server/cmd/hockeypuck-pbuild
+    go-importpath: github.com/hockeypuck/server
+    source: https://github.com/hockeypuck/server.git
+    source-type: git
+    source-branch: master
+    source-depth: 1
+    after:
+    - go
+  go:
+    source-tag: go1.10.3
+    source-depth: 1

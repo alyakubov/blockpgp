@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+CONFIG=$SNAP_COMMON/config
+if [ ! -f "$CONFIG" ]; then
+	echo "Missing config file $CONFIG."
+	echo "Use 'hockeypuck.config' to create/edit config file"
+	exit 1
+fi
+
+exec $SNAP/bin/hockeypuck-pbuild -config $CONFIG
