@@ -186,7 +186,7 @@ library LIB_iden {
 
         self.cOrchestr.newFinger( _email, _finger );
 
-        uint certHash = self.cOrchestr.calcCertHash_1(_ownCert);
+        uint certHash = self.cOrchestr.calcCertHash(_ownCert);
 
         if (self.identities[ uint( keccak256( _finger ) ) ].loadDate == 0) {
             insertIdentity(self, _finger, _ownCert, _name, _email, msg.sender);

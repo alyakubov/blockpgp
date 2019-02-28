@@ -35,3 +35,6 @@ fi
 #cd ./src/${BUILD_PACKAGE}/
 #./deploy_eth.sh
 
+mv ./src/${BUILD_PACKAGE}/build.bash .
+mv ./src/${BUILD_PACKAGE}/clean.bash .
+

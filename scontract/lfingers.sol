@@ -317,6 +317,8 @@ library LIB_fingers {
         return uint(sha256(extract));
     }
 
+    /*
+    // DEBUG
     function calcCertHash_1(DaFingers storage self, bytes armoured) external returns(uint result) {
         byte brkChar = 0xA;
         uint leadBrkNum = 3;
@@ -367,9 +369,10 @@ library LIB_fingers {
         }
         bytes32 resHash = keccak256(extract);
         bytes32 resHash2 = sha256(extract);
-        newLog( self, extract, resHash, resHash2, msg.sender );
+        //newLog( self, extract, resHash, resHash2, msg.sender );
         return uint(resHash);
     }
+    */
 
     /*
     function extractCertFromArmored(bytes armoured) external pure returns (bytes extract) {

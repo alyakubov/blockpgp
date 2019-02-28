@@ -4,6 +4,7 @@ outputPath=./scontract/binout
 addrFile=addr.txt
 addrLibFile=addrLib.txt
 gethWDir=/home/alex/wrk/Eth_wrk
+passwrd="ira"
 
 
 # prints the deployed SC address with the orchestration SET-function argument corresponding to this SC 
@@ -88,7 +89,7 @@ deploy_sc() {
     #echo "END"
     cat > ./tmpscript.js << EOF 
     chContract = eth.contract( $abifilecontent )
-    personal.unlockAccount(eth.accounts[0],"ira")
+    personal.unlockAccount(eth.accounts[0], "$passwrd")
     ch1 = chContract.new({
             from:web3.eth.accounts[0],
             data:'0x$binfilecontent',
@@ -149,7 +150,7 @@ init_sc() {
     cat > ./tmpinit.js << EOF 
     pgpContr = eth.contract( $abiFileContent )
     pgp = pgpContr.at( "$scAddr" )
-    personal.unlockAccount(eth.accounts[0],"ira")
+    personal.unlockAccount(eth.accounts[0], "$passwrd")
     pgp.Init.sendTransaction( "$cOrchestrAddr",
         {
             from:web3.eth.accounts[0], gas: 50000000
@@ -195,7 +196,7 @@ update_orchestr() {
     cat > ./tmporchestr.js << EOF 
     orchContr = eth.contract( $abiOrchestr )
     orch = orchContr.at( "$cOrchestrAddr" )
-    personal.unlockAccount(eth.accounts[0],"ira")
+    personal.unlockAccount(eth.accounts[0], "$passwrd")
     orch.InitOrchestr.sendTransaction( "$cOrchestrAddr", "$cIdenAddr",
         {
             from:web3.eth.accounts[0], gas: 50000000

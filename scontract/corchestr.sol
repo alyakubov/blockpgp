@@ -170,22 +170,13 @@ contract LU_PGP_orchestr is LU_PGP_base {
         }
         return uint(sha256(extract));*/
     }
-    function calcCertHash_1(bytes _armouredCert) external returns(uint) {
-        return cFingers.calcCertHash_1(_armouredCert);
-        /*bytes memory extract = LIB_fingers.extractCertFromArmored(_armouredCert);
-        if (extract.length == 0) {
-            return 0;
-        }
-        return uint(sha256(extract));*/
-    }
 
-
-    function newLog(bytes _str, bytes32 _uparam, bytes32 _iparam, address _addr) external {
+    /*function newLog(bytes _str, bytes32 _uparam, bytes32 _iparam, address _addr) external {
         cFingers.newLog(_str, _uparam, _iparam, _addr);
     }
     function getLog(uint _ind) external view returns(bytes, bytes32, bytes32) {
         return cFingers.getLog(_ind);
-    }
+    }*/
 
 
     /*
